@@ -3,15 +3,15 @@ class Solution {
    
     public:
     int arraySign(vector<int>& nums) {
-        int count =0;
+        int sign =1;
         for(auto it : nums){
             if(it == 0){
                 return 0;
             }
             if(it < 0){
-                count++;
+               sign = -1*sign; 
             }  
         }
-        return count %2 ==0 ? 1 : -1;
+        return sign;
     }
 };
