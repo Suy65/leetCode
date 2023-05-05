@@ -12,21 +12,32 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        stack<TreeNode*>st;
-        vector<int>ans;
-        while(true){
-         if(root != NULL){
-            st.push(root);
-            root =root->left;
-            
-         }else{
-            if(st.empty() == true)break;
-            root=st.top();
-            st.pop();
-            ans.push_back(root ->val); 
-            root = root->right;   
-         }
-       }
-        return ans;
+        //using morris traversal
+        vector<int>inorder;
+        TreeNode *curr =root;
+        while(curr != NULL){
+            if(curr->left == NULL){
+                inorder.push_back(curr ->val);
+                curr = curr ->right;
+                
+            }
+            else{
+                TreeNode *prev =curr ->left;
+                while(prev ->right && prev->right != curr){
+                    prev=prev->right;
+                }
+                if(prev->right == NULL){
+                    prev->right=curr;
+                    curr =curr->left;
+                }
+                else{
+                    prev->right = NULL;
+                    inorder.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
+        }
+        return inorder;
+        
     }
 };
