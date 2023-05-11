@@ -8,10 +8,12 @@ class Solution {
         if(dp[i][j] != -1)return dp[i][j];
         
         if(nums1[i] == nums2[j]){
-            return dp[i][j] = 1 + fun(i-1 ,j-1 , nums1 , nums2);
+            dp[i][j] = 1 + fun(i-1 ,j-1 , nums1 , nums2);
         }
-        return dp[i][j] = max(fun(i-1 , j , nums1 ,nums2),fun(i , j-1 ,nums1 ,nums2));
-        
+        else{
+           dp[i][j] = max(fun(i-1 , j , nums1 ,nums2),fun(i , j-1 ,nums1 ,nums2));
+        }
+        return dp[i][j];
     }   
     int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
         int n = nums1.size();
